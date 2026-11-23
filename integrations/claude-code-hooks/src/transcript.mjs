@@ -9,6 +9,8 @@ function cleanUserText(text) {
   return text
     .replace(/<system-reminder>[\s\S]*?<\/system-reminder>/g, '')
     .replace(/<local-command-[a-z]+>[\s\S]*?<\/local-command-[a-z]+>/g, '')
+    .replace(/<bash-(input|stdout|stderr)>[\s\S]*?<\/bash-\1>/g, '') // "!" shell commands and their output
+    .replace(/<task-notification>[\s\S]*?<\/task-notification>/g, '') // background task results
     .replace(/<command-(message|args)>[\s\S]*?<\/command-\1>/g, '')
     .replace(/<command-name>([\s\S]*?)<\/command-name>/g, '$1')
     .trim();

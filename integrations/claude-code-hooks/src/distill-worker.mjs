@@ -21,13 +21,14 @@ const ITEM_SCHEMA = {
       items: {
         type: 'object',
         properties: {
-          memory_type: { enum: ['decision', 'plan', 'handoff', 'summary'] },
+          memory_type: { enum: ['decision', 'reference', 'summary', 'plan', 'handoff'] },
           title: { type: 'string' },
           subject: { type: 'string' },
           summary: { type: 'string' },
           content: { type: 'string' },
           keywords: { type: 'array', items: { type: 'string' } },
           next_steps: { type: 'array', items: { type: 'string' } },
+          tags: { type: 'array', items: { type: 'string' } },
           priority: { enum: ['normal', 'high'] },
           routine_type: { enum: ['debugging', 'planning', 'implementation', 'review', 'testing', 'brainstorming', 'refactor', 'deployment'] },
         },
@@ -119,7 +120,7 @@ async function main() {
         const res = await call('vault_save_memory', {
           ...item,
           project: job.project,
-          tags: [...config.distill.tags, ...job.tags],
+          tags: [...config.distill.tags, ...job.tags, ...(item.tags ?? [])],
           source_app: 'claude',
           source_session_id: job.sessionId,
           status: 'active',

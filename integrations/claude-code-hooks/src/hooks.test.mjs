@@ -35,10 +35,12 @@ test('condenseTranscript keeps prose, drops tools/thinking/sidechains/reminders,
     { type: 'user', isCompactSummary: true, message: { content: 'summary so far' } },
     { type: 'attachment' },
     { type: 'user', message: { content: 'second question' } },
+    { type: 'user', message: { content: '<bash-input>rm -rf x</bash-input>' } },
+    { type: 'user', message: { content: '<task-notification><summary>done</summary></task-notification>' } },
   );
   const { text, userTurns, lineCount } = condenseTranscript(raw);
   assert.equal(userTurns, 2);
-  assert.equal(lineCount, 8);
+  assert.equal(lineCount, 10);
   assert.match(text, /USER: hello$/m);
   assert.match(text, /ASSISTANT: hi there/);
   assert.match(text, /\[EARLIER CONTEXT SUMMARY\]/);
