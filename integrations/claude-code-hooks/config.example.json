@@ -1,0 +1,19 @@
+{
+  "vaultServer": {
+    "command": "node",
+    "args": ["/path/to/the-vault/mcp-standalone/dist/index.js"]
+  },
+  "projects": [
+    { "project": "my-app", "paths": ["~/Projects/my-app"] },
+    { "project": "my-app", "paths": ["~/Projects/my-app-infra"], "tags": ["area:infra"] }
+  ],
+  "briefing": { "limit": 5, "maxChars": 6000 },
+  "distill": {
+    "model": "sonnet",
+    "claudeCommand": "claude",
+    "minExchanges": 3,
+    "tags": ["auto"],
+    "maxTranscriptChars": 200000
+  },
+  "logFile": "~/Vault/logs/claude-code-hooks.log"
+}
